@@ -58394,7 +58394,7 @@ var App = function App(props) {
     ),
     _react2.default.createElement(
       _reactNative.TouchableOpacity,
-      { onPress: props.getPeople, style: styles.button, __source: {
+      { onPress: props.fetchFromAPI, style: styles.button, __source: {
           fileName: _jsxFileName,
           lineNumber: 22
         }
@@ -58475,7 +58475,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPeople: function getPeople() {
+    fetchFromAPI: function fetchFromAPI() {
       return dispatch((0, _actions.fetchPeopleFromAPI)());
     }
   };
@@ -60176,7 +60176,7 @@ __d(/* rnredux/actions.js */function(global, require, module, exports) {Object.d
 });
 exports.fetchPeopleFromAPI = fetchPeopleFromAPI;
 
-var _constants = require(521          ); // 521 = ./constants
+var _types = require(527      ); // 527 = ./types
 
 function fetchPeopleFromAPI() {
     return function (dispatch) {
@@ -60186,36 +60186,36 @@ function fetchPeopleFromAPI() {
         }).then(function (json) {
             return dispatch(getPeopleSuccess(json.results));
         }).catch(function (err) {
-            return console.log(err);
+            return dispatch(getPeopleFailure(err));
         });
     };
 }
 
 function getPeople() {
     return {
-        type: _constants.FETCHING_PEOPLE
+        type: _types.FETCHING_PEOPLE
     };
 }
 
 function getPeopleSuccess(data) {
     return {
-        type: _constants.FETCHING_PEOPLE_SUCCESS, data: data
+        type: _types.FETCHING_PEOPLE_SUCCESS, data: data
     };
 }
 
 function getPeopleFailure() {
     return {
-        type: _constants.FETCHING_PEOPLE_FAILURE
+        type: _types.FETCHING_PEOPLE_FAILURE
     };
 }
 }, 520, null, "rnredux/actions.js");
-__d(/* rnredux/constants.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* rnredux/types.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var FETCHING_PEOPLE = exports.FETCHING_PEOPLE = 'FETCHING_PEOPLE';
 var FETCHING_PEOPLE_SUCCESS = exports.FETCHING_PEOPLE_SUCCESS = 'FETCHING_PEOPLE_SUCCESS';
 var FETCHING_PEOPLE_FAILURE = exports.FETCHING_PEOPLE_FAILURE = 'FETCHING_PEOPLE_FAILURE';
-}, 521, null, "rnredux/constants.js");
+}, 527, null, "rnredux/types.js");
 __d(/* rnredux/configureStore.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -60264,7 +60264,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = peopleReducer;
 
-var _constants = require(521           ); // 521 = ../constants
+var _types = require(527       ); // 527 = ../types
 
 var initialState = {
     people: [],
@@ -60277,21 +60277,21 @@ function peopleReducer() {
     var action = arguments[1];
 
     switch (action.type) {
-        case _constants.FETCHING_PEOPLE:
+        case _types.FETCHING_PEOPLE:
             {
                 return _extends({}, state, {
                     isFetching: true,
                     people: []
                 });
             }
-        case _constants.FETCHING_PEOPLE_SUCCESS:
+        case _types.FETCHING_PEOPLE_SUCCESS:
             {
                 return _extends({}, state, {
                     isFetching: false,
                     people: action.data
                 });
             }
-        case _constants.FETCHING_PEOPLE_FAILURE:
+        case _types.FETCHING_PEOPLE_FAILURE:
             {
                 return _extends({}, state, {
                     isFetching: false,

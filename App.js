@@ -19,7 +19,7 @@ const App = (props) => {
         <Text style={styles.welcome}>
           REDUX APP
         </Text>
-        <TouchableOpacity onPress={props.getPeople} style={styles.button}>
+        <TouchableOpacity onPress={props.fetchFromAPI} style={styles.button}>
           <Text>Fetch</Text>
         </TouchableOpacity>
         {isFetching && <Text> Loading </Text>}
@@ -70,7 +70,7 @@ function mapStateToProps(state){
 // To update our redux state
 function mapDispatchToProps(dispatch){
   return{
-    getPeople: () => dispatch(fetchPeopleFromAPI())
+    fetchFromAPI: () => dispatch(fetchPeopleFromAPI())
   }
 }
 
